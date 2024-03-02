@@ -1,11 +1,11 @@
 {
   "veicles": [
     {
-      "id": "2",
-      "name": "Mini Cooper 2023",
+      "name": "Mini Cooper 20234",
       "date": "15/07",
       "status": "Available",
-      "avaliation": "3"
+      "avaliation": "2",
+      "id": "2"
     },
     {
       "id": "e057",
@@ -22,18 +22,11 @@
       "avaliation": "1, 2, 3"
     },
     {
-      "id": "db7c",
-      "name": "Fiat Uno 2023",
-      "date": "2024-03-09",
+      "name": "Corolla Etios 2002",
+      "date": "2024-03-14",
       "status": "Available",
-      "avaliation": "1, 2, 3, 4, 5"
-    },
-    {
-      "id": "b2ae",
-      "name": "Marea 2001",
-      "date": "2024-03-13",
-      "status": "Available",
-      "avaliation": "1, 2, 3, 4"
+      "avaliation": "1, 2, 3",
+      "id": "59eb"
     }
   ]
 }

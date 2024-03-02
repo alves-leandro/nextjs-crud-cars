@@ -42,7 +42,7 @@ export const VeicleList: React.FC = () => {
             <Th textColor="white">ACTIONS</Th>
           </Tr>
         </Thead>
-        <Tbody bg="grey">
+        <Tbody bg="">
           {veicles.map((veicle) => (
             <Veicle
               key={veicle.id}

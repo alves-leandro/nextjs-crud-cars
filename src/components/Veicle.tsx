@@ -1,8 +1,9 @@
-'use client'
-import { IVeicles } from "@/types/veicles.types";
-import { Tr, Td, Flex, Button } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { Tr, Td, Flex, Button } from "@chakra-ui/react";
+import { IVeicles } from "@/types/veicles.types";
 import { deleteVeicle } from "@/services/api";
+import { useDisclosure } from "@chakra-ui/react";
+import EditModal from "./EditModal";
 
 interface VeicleProps {
   veicle: IVeicles;
@@ -11,6 +12,7 @@ interface VeicleProps {
 
 const Veicle: React.FC<VeicleProps> = ({ veicle, onUpdate }) => {
   const [isDeleting, setIsDeleting] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleDelete = async () => {
     setIsDeleting(true);
@@ -32,7 +34,13 @@ const Veicle: React.FC<VeicleProps> = ({ veicle, onUpdate }) => {
       <Td>{veicle.avaliation}</Td>
       <Td>
         <Flex>
-          <Button size="sm" fontSize="small" colorScheme="yellow" mr="2">
+          <Button
+            size="sm"
+            fontSize="small"
+            colorScheme="yellow"
+            mr="2"
+            onClick={onOpen}
+          >
             Editar
           </Button>
           <Button
@@ -48,6 +56,8 @@ const Veicle: React.FC<VeicleProps> = ({ veicle, onUpdate }) => {
           </Button>
         </Flex>
       </Td>
+
+      <EditModal isOpen={isOpen} onClose={onClose} veicle={veicle} onOpen={onOpen} onUpdate={onUpdate} />
     </Tr>
   );
 };
