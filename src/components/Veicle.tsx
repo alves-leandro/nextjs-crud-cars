@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Tr, Td, Flex, Button } from "@chakra-ui/react";
 import { IVeicles } from "@/types/veicles.types";
 import { deleteVeicle } from "@/services/api";
@@ -13,6 +13,7 @@ interface VeicleProps {
 const Veicle: React.FC<VeicleProps> = ({ veicle, onUpdate }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const finalRef = React.useRef(null); //AQUI TENTO SETAR 
 
   const handleDelete = async () => {
     setIsDeleting(true);
@@ -54,8 +55,8 @@ const Veicle: React.FC<VeicleProps> = ({ veicle, onUpdate }) => {
         isOpen={isOpen}
         onClose={onClose}
         veicle={veicle}
-        onOpen={onOpen}
         onUpdate={onUpdate}
+        finalRef={finalRef} 
       />
     </>
   );

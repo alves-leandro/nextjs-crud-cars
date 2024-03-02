@@ -4,20 +4,18 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
 } from "@chakra-ui/react";
 import { IVeicles } from "@/types/veicles.types";
 import EditForm from "./EditForm";
 
 interface EditModalProps {
   isOpen: boolean;
-  onOpen: () => void;
   onClose: () => void;
   veicle: IVeicles;
   onUpdate: () => void;
+  finalRef: React.RefObject<HTMLElement>; //AQUI TRAGO PARA O MODAL
 }
 
 const EditModal: React.FC<EditModalProps> = ({
@@ -25,9 +23,10 @@ const EditModal: React.FC<EditModalProps> = ({
   onClose,
   veicle,
   onUpdate,
+  finalRef, 
 }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} finalFocusRef={finalRef}>  
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Editar Veículo</ModalHeader>

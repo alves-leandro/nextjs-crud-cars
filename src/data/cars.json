@@ -1,13 +1,6 @@
 {
   "veicles": [
     {
-      "name": "Mini Cooper 20234",
-      "date": "15/07",
-      "status": "Available",
-      "avaliation": "4",
-      "id": "2"
-    },
-    {
       "id": "e057",
       "name": "Hilux 2000",
       "date": "2024-03-16",
@@ -22,10 +15,10 @@
       "avaliation": "1, 2, 3"
     },
     {
-      "name": "Corolla Etios 2003",
+      "name": "Corolla Etios 2022",
       "date": "2024-03-14",
       "status": "Available",
-      "avaliation": "1, 2, 3",
+      "avaliation": "1, 2",
       "id": "59eb"
     }
   ]
