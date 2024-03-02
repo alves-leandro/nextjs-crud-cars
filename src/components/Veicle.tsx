@@ -27,38 +27,37 @@ const Veicle: React.FC<VeicleProps> = ({ veicle, onUpdate }) => {
   };
 
   return (
-    <Tr key={veicle.id}>
-      <Td>{veicle.name}</Td>
-      <Td>{veicle.date}</Td>
-      <Td>{veicle.status}</Td>
-      <Td>{veicle.avaliation}</Td>
-      <Td>
-        <Flex>
-          <Button
-            size="sm"
-            fontSize="small"
-            colorScheme="yellow"
-            mr="2"
-            onClick={onOpen}
-          >
-            Editar
-          </Button>
-          <Button
-            size="sm"
-            fontSize="small"
-            colorScheme="red"
-            mr="2"
-            onClick={handleDelete}
-            isLoading={isDeleting}
-            loadingText="Removendo..."
-          >
-            Remover
-          </Button>
-        </Flex>
-      </Td>
-
-      <EditModal isOpen={isOpen} onClose={onClose} veicle={veicle} onOpen={onOpen} onUpdate={onUpdate} />
-    </Tr>
+    <>
+      <Flex>
+        <Button
+          size="sm"
+          fontSize="small"
+          colorScheme="yellow"
+          mr="2"
+          onClick={onOpen}
+        >
+          Editar
+        </Button>
+        <Button
+          size="sm"
+          fontSize="small"
+          colorScheme="red"
+          mr="2"
+          onClick={handleDelete}
+          isLoading={isDeleting}
+          loadingText="Removendo..."
+        >
+          Remover
+        </Button>
+      </Flex>
+      <EditModal
+        isOpen={isOpen}
+        onClose={onClose}
+        veicle={veicle}
+        onOpen={onOpen}
+        onUpdate={onUpdate}
+      />
+    </>
   );
 };
 
