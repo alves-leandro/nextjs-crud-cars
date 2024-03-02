@@ -45,6 +45,7 @@ const EditForm: React.FC<EditFormProps> = ({ veicle, onUpdate, onClose }) => {
           name="name"
           value={editedVeicle.name}
           onChange={handleInputChange}
+          autoComplete="off"
         />
       </FormControl>
       <FormControl>
@@ -54,6 +55,7 @@ const EditForm: React.FC<EditFormProps> = ({ veicle, onUpdate, onClose }) => {
           name="date"
           value={editedVeicle.date}
           onChange={handleInputChange}
+          autoComplete="off"
         />
       </FormControl>
       <FormControl>
@@ -63,6 +65,7 @@ const EditForm: React.FC<EditFormProps> = ({ veicle, onUpdate, onClose }) => {
           name="status"
           value={editedVeicle.status}
           onChange={handleInputChange}
+          autoComplete="off"
         />
       </FormControl>
       <FormControl>
@@ -72,6 +75,7 @@ const EditForm: React.FC<EditFormProps> = ({ veicle, onUpdate, onClose }) => {
           name="avaliation"
           value={editedVeicle.avaliation}
           onChange={handleInputChange}
+          autoComplete="off"
         />
       </FormControl>
       <Button colorScheme="blue" mr={3} type="submit">

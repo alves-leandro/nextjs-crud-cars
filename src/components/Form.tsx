@@ -45,7 +45,6 @@ const Form = () => {
       setStatus("Available");
       setRatings([]);
       setIsFormVisible(false);
-      
     } catch (error) {
       console.error("Erro ao cadastrar veículo:", error);
     }
@@ -65,22 +64,26 @@ const Form = () => {
       {isFormVisible && (
         <VStack className="" as="form" onSubmit={handleSubmit}>
           <FormControl>
-            <FormLabel>CARRO</FormLabel>
+            <FormLabel htmlFor="carNameInput">CARRO</FormLabel>
             <Input
               type="text"
               placeholder="Nome do Item"
               value={carName}
               onChange={(e) => setCarName(e.target.value)}
+              id="carNameInput"
             />
           </FormControl>
 
           <FormControl>
-            <FormLabel>PRÓXIMA RESERVA</FormLabel>
+            <FormLabel htmlFor="reservationDateInput">
+              PRÓXIMA RESERVA
+            </FormLabel>
             <Input
               type="date"
               placeholder="Data da Reserva"
               value={reservationDate}
               onChange={(e) => setReservationDate(e.target.value)}
+              id="reservationDateInput"
             />
           </FormControl>
 
@@ -98,12 +101,13 @@ const Form = () => {
           </FormControl>
 
           <FormControl>
-            <FormLabel>Avaliação</FormLabel>
+          {/* <FormLabel>Avaliação</FormLabel> */}
             {[1, 2, 3, 4, 5].map((value) => (
               <Checkbox
                 key={value}
                 isChecked={ratings.includes(value)}
                 onChange={() => handleStarClick(value)}
+                id={`starCheckbox${value}`} // Adicionando um ID único para cada checkbox
               >
                 {value}
               </Checkbox>
