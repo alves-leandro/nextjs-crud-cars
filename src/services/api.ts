@@ -1,20 +1,20 @@
-import { IVeicles } from "@/types/veicles.types";
+import { VeicleData } from "@/schemas/veicle.schema";
 
 const baseUrl = "http://localhost:3001";
 
-export const getAllVeicles = async (): Promise<IVeicles[]> => {
+export const getAllVeicles = async (): Promise<VeicleData[]> => {
   const response = await fetch(`${baseUrl}/veicles`);
   const veicles = await response.json();
   return veicles;
 };
 
-export const getVeicleById = async (id: string): Promise<IVeicles> => {
+export const getVeicleById = async (id: string): Promise<VeicleData> => {
   const response = await fetch(`${baseUrl}/veicles/${id}`);
   const veicle = await response.json();
   return veicle;
 };
 
-export const createVeicle = async (data: Partial<IVeicles>): Promise<IVeicles> => {
+export const createVeicle = async (data: Partial<VeicleData>): Promise<VeicleData> => {
   const response = await fetch(`${baseUrl}/veicles`, {
     method: "POST",
     headers: {
@@ -26,7 +26,7 @@ export const createVeicle = async (data: Partial<IVeicles>): Promise<IVeicles> =
   return newVeicle;
 };
 
-export const updateVeicle = async (id: string, data: Partial<IVeicles>): Promise<void> => {
+export const updateVeicle = async (id: string, data: Partial<VeicleData>): Promise<void> => {
   await fetch(`${baseUrl}/veicles/${id}`, {
     method: "PUT",
     headers: {

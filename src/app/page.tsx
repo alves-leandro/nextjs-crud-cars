@@ -1,8 +1,8 @@
 import { Box, Flex } from "@chakra-ui/react";
-import Header from "@/components/Header";
-import { VeicleList } from "@/components/VeicleList";
+import Header from "@/components/header";
+import { VeicleList } from "@/components/veicleList";
 
-import Form from "@/components/Form";
+import Form from "@/components/createForm";
 
 export default function Home() {
   return (

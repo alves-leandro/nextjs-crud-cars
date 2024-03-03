@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
-import { IVeicles } from "@/types/veicles.types";
 import { updateVeicle } from "@/services/api";
+import { VeicleData } from "@/schemas/veicle.schema";
 
 interface EditFormProps {
-  veicle: IVeicles;
+  veicle: VeicleData;
   onUpdate: () => void;
   onClose: () => void;
 }

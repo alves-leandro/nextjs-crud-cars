@@ -1,12 +1,16 @@
-"use client";
-import { IVeicles } from "@/types/veicles.types";
-import { Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+'use client'
 import React, { useEffect, useState } from "react";
-import Veicle from "./Veicle";
+import { Table, Tbody, Th, Thead, Tr } from "@chakra-ui/react";
 import { getAllVeicles } from "@/services/api";
+import Veicle from "./veicle";
+import { VeicleData } from "@/schemas/veicle.schema";
+
+interface ListVeiclesProps {
+  veicles: VeicleData[]
+}
 
 export const VeicleList: React.FC = () => {
-  const [veicles, setVeicles] = useState<IVeicles[]>([]);
+  const [veicles, setVeicles] = useState<VeicleData[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,20 +34,6 @@ export const VeicleList: React.FC = () => {
     }
   };
 
-  const renderVeicleRow = (veicle: IVeicles) => {
-    return (
-      <Tr key={veicle.id}>
-        <Td>{veicle.name}</Td>
-        <Td>{veicle.date}</Td>
-        <Td>{veicle.status}</Td>
-        <Td>{veicle.avaliation}</Td>
-        <Td>
-          <Veicle veicle={veicle} onUpdate={handleUpdateVeicles} />
-        </Td>
-      </Tr>
-    );
-  };
-
   return (
     <div>
       <Table variant="simple" mt={6}>
@@ -57,7 +47,9 @@ export const VeicleList: React.FC = () => {
           </Tr>
         </Thead>
         <Tbody bg="">
-          {veicles.map((veicle) => renderVeicleRow(veicle))}
+          {veicles.map((veicle) => (
+            <Veicle key={veicle.id} veicle={veicle} onUpdate={handleUpdateVeicles} />
+          ))}
         </Tbody>
       </Table>
     </div>
