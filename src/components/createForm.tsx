@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import {
   Button,
@@ -7,30 +8,24 @@ import {
   FormLabel,
   Input,
   VStack,
-  Checkbox,
   RadioGroup,
   HStack,
   Radio,
 } from "@chakra-ui/react";
 import { createVeicle } from "@/services/api";
 import { useRouter } from "next/navigation";
+import { StarIcon } from "@chakra-ui/icons";
 
 const Form = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [carName, setCarName] = useState("");
   const [reservationDate, setReservationDate] = useState("");
   const [status, setStatus] = useState("Available");
-  const [ratings, setRatings] = useState<(string | number)[]>([]);
+  const [rating, setRating] = useState(0); 
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   const handleStarClick = (value: number) => {
-    const newRatings = [];
-    for (let i = 1; i <= 5; i++) {
-      if (i <= value) {
-        newRatings.push(i);
-      }
-    }
-    setRatings(newRatings);
+    setRating(value);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -40,12 +35,12 @@ const Form = () => {
         name: carName,
         date: reservationDate,
         status,
-        avaliation: ratings.join(", "),
+        avaliation: rating.toString(),
       });
       setCarName("");
       setReservationDate("");
       setStatus("Available");
-      setRatings([]);
+      setRating(0);
       setIsFormVisible(false);
       router.refresh();
     } catch (error) {
@@ -66,8 +61,8 @@ const Form = () => {
 
       {isFormVisible && (
         <VStack className="" as="form" onSubmit={handleSubmit}>
-          <FormControl>
-            <FormLabel htmlFor="carNameInput">CARRO</FormLabel>
+          <FormControl mt={6}>
+            <FormLabel htmlFor="carNameInput">VEICLE</FormLabel>
             <Input
               type="text"
               placeholder="Nome do Item"
@@ -77,9 +72,9 @@ const Form = () => {
             />
           </FormControl>
 
-          <FormControl>
+          <FormControl mt={6}>
             <FormLabel htmlFor="reservationDateInput">
-              PRÓXIMA RESERVA
+              RESERVATION
             </FormLabel>
             <Input
               type="date"
@@ -90,11 +85,11 @@ const Form = () => {
             />
           </FormControl>
 
-          <FormControl as="fieldset">
+          <FormControl as="fieldset" mt={6}>
             <FormLabel as="legend">STATUS</FormLabel>
             <RadioGroup
               value={status}
-              onChange={(value) => setStatus(value as string)}
+              onChange={(value) => setStatus(value)}
             >
               <HStack spacing="24px">
                 <Radio value="Available">Disponível</Radio>
@@ -103,17 +98,17 @@ const Form = () => {
             </RadioGroup>
           </FormControl>
 
-          <FormControl>
-          {/* <FormLabel>Avaliação</FormLabel> */}
+          <FormControl mt={6}>
+            <FormLabel as="legend">RATING</FormLabel>
+
             {[1, 2, 3, 4, 5].map((value) => (
-              <Checkbox
+              <StarIcon
                 key={value}
-                isChecked={ratings.includes(value)}
-                onChange={() => handleStarClick(value)}
-                id={`starCheckbox${value}`} // Adicionando um ID único para cada checkbox
-              >
-                {value}
-              </Checkbox>
+                color={value <= rating ? "yellow.500" : "gray.300"}
+                onClick={() => handleStarClick(value)}
+                cursor="pointer"
+                boxSize={6}
+              />
             ))}
           </FormControl>
 

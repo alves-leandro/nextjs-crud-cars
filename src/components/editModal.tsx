@@ -27,14 +27,11 @@ const EditModal: React.FC<EditModalProps> = ({
     <Modal isOpen={isOpen} onClose={onClose}>  
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Editar Veículo</ModalHeader>
+        <ModalHeader mt={6}>Editar Veículo</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <EditForm veicle={veicle} onClose={onClose} />
         </ModalBody>
-        <ModalFooter>
-          <Button onClick={onClose}></Button>
-        </ModalFooter>
       </ModalContent>
     </Modal>
   );

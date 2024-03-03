@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Select,
+  Flex,
+} from "@chakra-ui/react";
 import { updateVeicle } from "@/services/api";
 import { VeicleData } from "@/schemas/veicle.schema";
 import { useRouter } from "next/navigation";
+import { StarIcon } from "@chakra-ui/icons";
 
 interface EditFormProps {
   veicle: VeicleData;
@@ -10,12 +18,9 @@ interface EditFormProps {
 }
 
 const EditForm: React.FC<EditFormProps> = ({ veicle, onClose }) => {
-  const router = useRouter()
-  const [editedVeicle, setEditedVeicle] = useState({
-    name: veicle.name,
-    date: veicle.date,
-    status: veicle.status,
-    avaliation: veicle.avaliation,
+  const router = useRouter();
+  const [editedVeicle, setEditedVeicle] = useState<VeicleData>({
+    ...veicle, // Copiando todos os dados do veículo para o estado de edição inicial
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,6 +28,21 @@ const EditForm: React.FC<EditFormProps> = ({ veicle, onClose }) => {
     setEditedVeicle((prevVeicle) => ({
       ...prevVeicle,
       [name]: value,
+    }));
+  };
+
+  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setEditedVeicle((prevVeicle) => ({
+      ...prevVeicle,
+      [name]: value,
+    }));
+  };
+
+  const handleStarClick = (value: number) => {
+    setEditedVeicle((prevVeicle) => ({
+      ...prevVeicle,
+      avaliation: value.toString(),
     }));
   };
 
@@ -40,7 +60,7 @@ const EditForm: React.FC<EditFormProps> = ({ veicle, onClose }) => {
   return (
     <form onSubmit={handleSubmit}>
       <FormControl>
-        <FormLabel>Nome</FormLabel>
+        <FormLabel>VEICLE</FormLabel>
         <Input
           type="text"
           name="name"
@@ -49,42 +69,56 @@ const EditForm: React.FC<EditFormProps> = ({ veicle, onClose }) => {
           autoComplete="off"
         />
       </FormControl>
-      <FormControl>
-        <FormLabel>Data</FormLabel>
+      
+      <FormControl mt={6}>
+        <FormLabel>RESERVATION</FormLabel>
         <Input
-          type="text"
+          type="date"
           name="date"
           value={editedVeicle.date}
           onChange={handleInputChange}
           autoComplete="off"
         />
       </FormControl>
-      <FormControl>
-        <FormLabel>Status</FormLabel>
-        <Input
-          type="text"
+
+      <FormControl mt={6}>
+        <FormLabel>STATUS</FormLabel>
+        <Select
           name="status"
           value={editedVeicle.status}
-          onChange={handleInputChange}
-          autoComplete="off"
-        />
+          onChange={handleStatusChange}
+        >
+          <option value="Available">Available</option>
+          <option value="Unavailable">Unavailable</option>
+        </Select>
       </FormControl>
-      <FormControl>
-        <FormLabel>Avaliação</FormLabel>
-        <Input
-          type="text"
-          name="avaliation"
-          value={editedVeicle.avaliation}
-          onChange={handleInputChange}
-          autoComplete="off"
-        />
+
+      <FormControl mt={6}>
+        <FormLabel as="legend">RATING</FormLabel>
+
+        {[1, 2, 3, 4, 5].map((value) => (
+          <StarIcon
+            key={value}
+            color={
+              value <= parseInt(editedVeicle.avaliation)
+                ? "yellow.500"
+                : "gray.300"
+            }
+            onClick={() => handleStarClick(value)}
+            cursor="pointer"
+            boxSize={6}
+          />
+        ))}
       </FormControl>
-      <Button colorScheme="blue" mr={3} type="submit">
-        Salvar
-      </Button>
-      <Button variant="ghost" onClick={onClose}>
-        Cancelar
-      </Button>
+
+      <Flex justifyContent="flex-end">
+        <Button colorScheme="blue" type="submit" mt={6}>
+          Salvar
+        </Button>
+        <Button variant="ghost" onClick={onClose} ml={3} mt={6}>
+          Cancelar
+        </Button>
+      </Flex>
     </form>
   );
 };

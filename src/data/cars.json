@@ -1,25 +1,25 @@
 {
   "veicles": [
     {
-      "id": "e057",
+      "name": "Hilux 2000",
+      "date": "2024-03-14",
+      "status": "Available",
+      "avaliation": "4",
+      "id": "e057"
+    },
+    {
       "name": "Hilux 2000",
       "date": "2024-03-16",
       "status": "Unavailable",
-      "avaliation": "1, 2, 3, 4, 5"
+      "avaliation": "3",
+      "id": "7b53"
     },
     {
-      "id": "7b53",
-      "name": "Hilux 2000",
-      "date": "2024-03-16",
-      "status": "Unavailable",
-      "avaliation": "1, 2, 3"
-    },
-    {
-      "name": "Batata Frita 123",
-      "date": "2024-03-24",
-      "status": "Unavailable",
-      "avaliation": "1, 2",
-      "id": "9b83"
+      "name": "Batata Frita",
+      "date": "2024-03-14",
+      "status": "Available",
+      "avaliation": "2",
+      "id": "660f"
     }
   ]
 }
