@@ -20,18 +20,10 @@ interface EditFormProps {
 const EditForm: React.FC<EditFormProps> = ({ veicle, onClose }) => {
   const router = useRouter();
   const [editedVeicle, setEditedVeicle] = useState<VeicleData>({
-    ...veicle, // Copiando todos os dados do veículo para o estado de edição inicial
+    ...veicle,
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setEditedVeicle((prevVeicle) => ({
-      ...prevVeicle,
-      [name]: value,
-    }));
-  };
-
-  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setEditedVeicle((prevVeicle) => ({
       ...prevVeicle,
@@ -65,18 +57,18 @@ const EditForm: React.FC<EditFormProps> = ({ veicle, onClose }) => {
           type="text"
           name="name"
           value={editedVeicle.name}
-          onChange={handleInputChange}
+          onChange={handleChange}
           autoComplete="off"
         />
       </FormControl>
-      
+
       <FormControl mt={6}>
         <FormLabel>RESERVATION</FormLabel>
         <Input
           type="date"
           name="date"
           value={editedVeicle.date}
-          onChange={handleInputChange}
+          onChange={handleChange}
           autoComplete="off"
         />
       </FormControl>
@@ -86,16 +78,27 @@ const EditForm: React.FC<EditFormProps> = ({ veicle, onClose }) => {
         <Select
           name="status"
           value={editedVeicle.status}
-          onChange={handleStatusChange}
+          onChange={handleChange}
         >
-          <option value="Available">Available</option>
-          <option value="Unavailable">Unavailable</option>
+          <option value="Available">Disponível</option>
+          <option value="Unavailable">Indisponível</option>
         </Select>
       </FormControl>
 
       <FormControl mt={6}>
-        <FormLabel as="legend">RATING</FormLabel>
+        <FormLabel htmlFor="imageInput">IMAGE</FormLabel>
+        <Input
+          type="text"
+          name="image"
+          placeholder="URL da Imagem"
+          value={editedVeicle.image}
+          onChange={handleChange}
+          autoComplete="off"
+        />
+      </FormControl>
 
+      <FormControl mt={6}>
+        <FormLabel as="legend">RATE</FormLabel>
         {[1, 2, 3, 4, 5].map((value) => (
           <StarIcon
             key={value}
@@ -113,10 +116,10 @@ const EditForm: React.FC<EditFormProps> = ({ veicle, onClose }) => {
 
       <Flex justifyContent="flex-end">
         <Button colorScheme="blue" type="submit" mt={6}>
-          Salvar
+          Save
         </Button>
         <Button variant="ghost" onClick={onClose} ml={3} mt={6}>
-          Cancelar
+          Cancel
         </Button>
       </Flex>
     </form>

@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <Flex as="nav" align="center" justify="space-between" wrap="wrap" padding={6} bg="teal.500" color="white">
       <Flex align="center" mr={5}>
-        <Heading as='h1' size="lg" letterSpacing={"lighther"}>Cadastro Elementos</Heading>
+        <Heading as='h1' size="lg" letterSpacing={"lighther"}>VEICLE LIST</Heading>
       </Flex>
     </Flex>
   );

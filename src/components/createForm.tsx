@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import React, { useState } from "react";
 import {
@@ -21,7 +21,8 @@ const Form = () => {
   const [carName, setCarName] = useState("");
   const [reservationDate, setReservationDate] = useState("");
   const [status, setStatus] = useState("Available");
-  const [rating, setRating] = useState(0); 
+  const [rating, setRating] = useState(0);
+  const [image, setImage] = useState("");
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   const handleStarClick = (value: number) => {
@@ -36,11 +37,13 @@ const Form = () => {
         date: reservationDate,
         status,
         avaliation: rating.toString(),
+        image,
       });
       setCarName("");
       setReservationDate("");
       setStatus("Available");
       setRating(0);
+      setImage("");
       setIsFormVisible(false);
       router.refresh();
     } catch (error) {
@@ -65,7 +68,7 @@ const Form = () => {
             <FormLabel htmlFor="carNameInput">VEICLE</FormLabel>
             <Input
               type="text"
-              placeholder="Nome do Item"
+              placeholder="Veicle name"
               value={carName}
               onChange={(e) => setCarName(e.target.value)}
               id="carNameInput"
@@ -73,33 +76,40 @@ const Form = () => {
           </FormControl>
 
           <FormControl mt={6}>
-            <FormLabel htmlFor="reservationDateInput">
-              RESERVATION
-            </FormLabel>
+            <FormLabel htmlFor="imageInput">IMAGE</FormLabel>
+            <Input
+              type="text"
+              placeholder="Image URL"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+              id="imageInput"
+            />
+          </FormControl>
+
+          <FormControl mt={6}>
+            <FormLabel htmlFor="reservationDateInput">RESERVATION</FormLabel>
             <Input
               type="date"
-              placeholder="Data da Reserva"
+              placeholder="Reservation Date"
               value={reservationDate}
               onChange={(e) => setReservationDate(e.target.value)}
+              min={new Date().toISOString().split('T')[0]}
               id="reservationDateInput"
             />
           </FormControl>
 
           <FormControl as="fieldset" mt={6}>
             <FormLabel as="legend">STATUS</FormLabel>
-            <RadioGroup
-              value={status}
-              onChange={(value) => setStatus(value)}
-            >
+            <RadioGroup value={status} onChange={(value) => setStatus(value)}>
               <HStack spacing="24px">
-                <Radio value="Available">Disponível</Radio>
-                <Radio value="Unavailable">Indisponível</Radio>
+                <Radio value="Available">Available</Radio>
+                <Radio value="Unavailable">Unavailable</Radio>
               </HStack>
             </RadioGroup>
           </FormControl>
 
           <FormControl mt={6}>
-            <FormLabel as="legend">RATING</FormLabel>
+            <FormLabel as="legend">RATE</FormLabel>
 
             {[1, 2, 3, 4, 5].map((value) => (
               <StarIcon
@@ -113,7 +123,7 @@ const Form = () => {
           </FormControl>
 
           <Button colorScheme="green" type="submit" mt={6}>
-            Cadastrar
+            Register
           </Button>
         </VStack>
       )}

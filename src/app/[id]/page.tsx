@@ -18,22 +18,25 @@ const Veicle = async ({ params }: PageProps) => {
   const veicle = response;
 
   return (
-    <main className="body min-h-screen p-4">
-      <Box>
+    <main className="body min-h-screen p-4 flex items-center justify-center">
+      <Box maxW="900px">
         <Box
-          width={900}
+          width="100%"
           borderWidth={1}
           borderRadius={8}
           boxShadow="lg"
           p={20}
-          mt="25"
+          mt={{ base: "10", md: "25" }}
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+          alignItems="center"
+          flexWrap="wrap"
         >
-        <Button className="flex justify-end p-6">
-          <Link href={"/"}>Voltar</Link>
-        </Button>
-          <div className="flex items-center justify-center">
+          <Link href={"/"} alignSelf="flex-start" mb={{ base: "4", md: "0" }}>Voltar</Link>
+          <Box className="flex items-center justify-center mt-4">
             <VeicleIdCard veicle={veicle}></VeicleIdCard>
-          </div>
+          </Box>
         </Box>
       </Box>
     </main>

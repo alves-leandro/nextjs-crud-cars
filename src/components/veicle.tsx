@@ -1,10 +1,21 @@
 import React, { useState } from "react";
-import { Td, Button, Flex, Tr, useDisclosure, Link, Box, Text } from "@chakra-ui/react";
+import {
+  Td,
+  Button,
+  Flex,
+  Tr,
+  useDisclosure,
+  Link,
+  Box,
+  Text,
+  Image,
+} from "@chakra-ui/react";
 import { deleteVeicle } from "@/services/api";
 import EditModal from "./editModal";
 import { VeicleData } from "@/schemas/veicle.schema";
 import { useRouter } from "next/navigation";
 import { StarIcon } from "@chakra-ui/icons";
+// import Image from "next/image";
 
 interface VeicleProps {
   veicle: VeicleData;
@@ -35,8 +46,8 @@ const Veicle: React.FC<VeicleProps> = ({ veicle }) => {
         {[1, 2, 3, 4, 5].map((value) => (
           <StarIcon
             key={value}
-            color={value <= rating ? "yellow.500" : "gray.300"}
-            boxSize={{ base: 3, md: 4 }} 
+            color={value <= rating ? "yellow.400" : "gray.300"}
+            boxSize={{ base: 3, md: 4 }}
           />
         ))}
       </Flex>
@@ -45,10 +56,31 @@ const Veicle: React.FC<VeicleProps> = ({ veicle }) => {
 
   const avaliationNumber = parseInt(veicle.avaliation);
 
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "Available":
+        return "green";
+      case "Unavailable":
+        return "red";
+      default:
+        return "transparent";
+    }
+  };
+
   return (
     <Tr borderBottomWidth={0}>
       <Td>
-        <Link href={`/${veicle.id}`}>IMAGE</Link>
+        <Link href={`/${veicle.id}`}>
+
+            <Image
+              src={veicle.image}
+              alt={veicle.name}
+              boxSize={{ base: "50px", md: "115px" }}
+              objectFit="fill"
+              
+            />
+
+        </Link>
       </Td>
       <Td>
         <Text fontSize={{ base: "sm", md: "md" }}>{veicle.name}</Text>
@@ -57,7 +89,15 @@ const Veicle: React.FC<VeicleProps> = ({ veicle }) => {
         <Text fontSize={{ base: "sm", md: "md" }}>{veicle.date}</Text>
       </Td>
       <Td>
-        <Text fontSize={{ base: "sm", md: "md" }}>{veicle.status}</Text>
+        <Box
+          bg={getStatusColor(veicle.status)}
+          display="inline-block"
+          borderRadius="md"
+          px={2}
+          py={1}
+        >
+          <Text fontSize={{ base: "sm", md: "md" }}>{veicle.status}</Text>
+        </Box>
       </Td>
       <Td>{renderStars(avaliationNumber)}</Td>
       <Td>
