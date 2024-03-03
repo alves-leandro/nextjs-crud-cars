@@ -13,8 +13,10 @@ import {
   Radio,
 } from "@chakra-ui/react";
 import { createVeicle } from "@/services/api";
+import { useRouter } from "next/navigation";
 
 const Form = () => {
+  const router = useRouter()
   const [carName, setCarName] = useState("");
   const [reservationDate, setReservationDate] = useState("");
   const [status, setStatus] = useState("Available");
@@ -45,6 +47,7 @@ const Form = () => {
       setStatus("Available");
       setRatings([]);
       setIsFormVisible(false);
+      router.refresh();
     } catch (error) {
       console.error("Erro ao cadastrar veículo:", error);
     }

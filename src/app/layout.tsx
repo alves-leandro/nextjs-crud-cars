@@ -17,9 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <ChakraProvider cssVarsRoot="body">{children}</ChakraProvider>
-      </body>
+        <body className={inter.className}>
+          <ChakraProvider cssVarsRoot="body">{children}</ChakraProvider>
+        </body>
     </html>
   );
 }

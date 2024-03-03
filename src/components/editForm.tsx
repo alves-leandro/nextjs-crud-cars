@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
 import { updateVeicle } from "@/services/api";
 import { VeicleData } from "@/schemas/veicle.schema";
+import { useRouter } from "next/navigation";
 
 interface EditFormProps {
   veicle: VeicleData;
-  onUpdate: () => void;
   onClose: () => void;
 }
 
-const EditForm: React.FC<EditFormProps> = ({ veicle, onUpdate, onClose }) => {
+const EditForm: React.FC<EditFormProps> = ({ veicle, onClose }) => {
+  const router = useRouter()
   const [editedVeicle, setEditedVeicle] = useState({
     name: veicle.name,
     date: veicle.date,
@@ -29,7 +30,7 @@ const EditForm: React.FC<EditFormProps> = ({ veicle, onUpdate, onClose }) => {
     e.preventDefault();
     try {
       await updateVeicle(veicle.id, editedVeicle);
-      onUpdate();
+      router.refresh();
       onClose();
     } catch (error) {
       console.error("Erro ao atualizar veículo:", error);

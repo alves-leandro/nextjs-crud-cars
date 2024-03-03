@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { Td, Button, Flex, Tr, useDisclosure } from "@chakra-ui/react";
+import { Td, Button, Flex, Tr, useDisclosure, Link } from "@chakra-ui/react";
 import { deleteVeicle } from "@/services/api";
 import EditModal from "./editModal";
 import { VeicleData } from "@/schemas/veicle.schema";
+import { useRouter } from "next/navigation";
 
 interface VeicleProps {
   veicle: VeicleData;
-  onUpdate: () => void;
 }
 
-const Veicle = ({ veicle, onUpdate }: VeicleProps) => {
+const Veicle: React.FC<VeicleProps> = ({ veicle }) => {
+  const router = useRouter();
   const [isDeleting, setIsDeleting] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -17,7 +18,7 @@ const Veicle = ({ veicle, onUpdate }: VeicleProps) => {
     setIsDeleting(true);
     try {
       await deleteVeicle(veicle.id);
-      onUpdate();
+      router.refresh();
     } catch (error) {
       console.error("Erro ao excluir veículo:", error);
     } finally {
@@ -27,6 +28,9 @@ const Veicle = ({ veicle, onUpdate }: VeicleProps) => {
 
   return (
     <Tr>
+      <Td>
+        <Link href={`/${veicle.id}`}>Teste</Link>
+      </Td>
       <Td>{veicle.name}</Td>
       <Td>{veicle.date}</Td>
       <Td>{veicle.status}</Td>
@@ -54,12 +58,9 @@ const Veicle = ({ veicle, onUpdate }: VeicleProps) => {
           </Button>
         </Flex>
       </Td>
-      <EditModal
-        isOpen={isOpen}
-        onClose={onClose}
-        veicle={veicle}
-        onUpdate={onUpdate}
-      />
+      <Td>
+        <EditModal isOpen={isOpen} onClose={onClose} veicle={veicle} />
+      </Td>
     </Tr>
   );
 };

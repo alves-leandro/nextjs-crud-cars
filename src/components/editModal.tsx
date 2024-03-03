@@ -16,14 +16,12 @@ interface EditModalProps {
   isOpen: boolean;
   onClose: () => void;
   veicle: VeicleData;
-  onUpdate: () => void;
 }
 
 const EditModal: React.FC<EditModalProps> = ({
   isOpen,
   onClose,
-  veicle,
-  onUpdate,
+  veicle
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>  
@@ -32,7 +30,7 @@ const EditModal: React.FC<EditModalProps> = ({
         <ModalHeader>Editar Veículo</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <EditForm veicle={veicle} onUpdate={onUpdate} onClose={onClose} />
+          <EditForm veicle={veicle} onClose={onClose} />
         </ModalBody>
         <ModalFooter>
           <Button onClick={onClose}></Button>
