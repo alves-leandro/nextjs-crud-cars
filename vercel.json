@@ -1,0 +1,20 @@
+{
+    "version": 2,
+    "builds": [
+      { "src": "next.config.js", "use": "@vercel/node" }
+    ],
+    "routes": [
+      {
+        "src": "/api/.*",
+        "dest": "json-server --watch src/data/cars.json --port 3001"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/"
+      }
+    ],
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
+  
